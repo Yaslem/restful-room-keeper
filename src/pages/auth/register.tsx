@@ -20,12 +20,18 @@ const Register = () => {
       return;
     }
 
-    const { error } = await signUp(email, password);
-    if (error) {
-      toast.error("فشل إنشاء الحساب");
-    } else {
-      toast.success("تم إنشاء الحساب بنجاح");
-      navigate("/auth/login");
+    try {
+      const { error } = await signUp(email, password);
+      if (error) {
+        console.error("تفاصيل الخطأ:", error);
+        toast.error(`فشل إنشاء الحساب: ${error.message}`);
+      } else {
+        toast.success("تم إنشاء الحساب بنجاح");
+        navigate("/auth/login");
+      }
+    } catch (err) {
+      console.error("خطأ غير متوقع:", err);
+      toast.error("حدث خطأ غير متوقع أثناء إنشاء الحساب");
     }
   };
 
