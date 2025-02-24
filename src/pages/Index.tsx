@@ -5,7 +5,7 @@ import {
   Users,
   CalendarDays,
   Menu,
-  ChevronRight,
+  ChevronLeft,
   Search,
   BedDouble,
 } from "lucide-react";
@@ -25,67 +25,67 @@ const Index = () => {
 
   // Dummy data for demonstration
   const rooms = [
-    { id: 1, number: "101", type: "Deluxe", status: "available", guest: null },
-    { id: 2, number: "102", type: "Suite", status: "occupied", guest: "John Doe" },
-    { id: 3, number: "103", type: "Standard", status: "maintenance", guest: null },
-    { id: 4, number: "104", type: "Deluxe", status: "available", guest: null },
-    { id: 5, number: "105", type: "Suite", status: "occupied", guest: "Jane Smith" },
+    { id: 1, number: "١٠١", type: "فاخرة", status: "متاح", guest: null },
+    { id: 2, number: "١٠٢", type: "جناح", status: "مشغول", guest: "أحمد محمد" },
+    { id: 3, number: "١٠٣", type: "قياسية", status: "صيانة", guest: null },
+    { id: 4, number: "١٠٤", type: "فاخرة", status: "متاح", guest: null },
+    { id: 5, number: "١٠٥", type: "جناح", status: "مشغول", guest: "سارة أحمد" },
   ];
 
   const stats = [
-    { title: "Total Rooms", value: "50", icon: Hotel },
-    { title: "Occupied", value: "32", icon: BedDouble },
-    { title: "Guests", value: "45", icon: Users },
-    { title: "Bookings", value: "12", icon: CalendarDays },
+    { title: "إجمالي الغرف", value: "٥٠", icon: Hotel },
+    { title: "الغرف المشغولة", value: "٣٢", icon: BedDouble },
+    { title: "النزلاء", value: "٤٥", icon: Users },
+    { title: "الحجوزات", value: "١٢", icon: CalendarDays },
   ];
 
   return (
     <div className="flex min-h-screen bg-gray-50">
       {/* Sidebar */}
       <aside
-        className={`fixed left-0 top-0 z-40 h-screen w-64 transform bg-white shadow-lg transition-transform duration-300 ease-in-out ${
-          isSidebarOpen ? "translate-x-0" : "-translate-x-full"
+        className={`fixed right-0 top-0 z-40 h-screen w-64 transform bg-white shadow-lg transition-transform duration-300 ease-in-out ${
+          isSidebarOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
         <div className="flex h-full flex-col">
           <div className="flex items-center justify-between border-b px-6 py-4">
-            <h1 className="text-xl font-semibold text-gray-800">Hotel Manager</h1>
+            <h1 className="text-xl font-semibold text-gray-800">نظام إدارة الفندق</h1>
             <Button
               variant="ghost"
               size="icon"
               onClick={() => setIsSidebarOpen(false)}
             >
-              <ChevronRight className="h-5 w-5" />
+              <ChevronLeft className="h-5 w-5" />
             </Button>
           </div>
           <nav className="flex-1 space-y-1 px-3 py-4">
             <Button
               variant="ghost"
-              className="w-full justify-start text-left"
+              className="w-full justify-start text-right"
             >
-              <Hotel className="mr-2 h-5 w-5" />
-              Dashboard
+              <Hotel className="ml-2 h-5 w-5" />
+              لوحة التحكم
             </Button>
             <Button
               variant="ghost"
-              className="w-full justify-start text-left"
+              className="w-full justify-start text-right"
             >
-              <BedDouble className="mr-2 h-5 w-5" />
-              Rooms
+              <BedDouble className="ml-2 h-5 w-5" />
+              الغرف
             </Button>
             <Button
               variant="ghost"
-              className="w-full justify-start text-left"
+              className="w-full justify-start text-right"
             >
-              <Users className="mr-2 h-5 w-5" />
-              Guests
+              <Users className="ml-2 h-5 w-5" />
+              النزلاء
             </Button>
             <Button
               variant="ghost"
-              className="w-full justify-start text-left"
+              className="w-full justify-start text-right"
             >
-              <CalendarDays className="mr-2 h-5 w-5" />
-              Bookings
+              <CalendarDays className="ml-2 h-5 w-5" />
+              الحجوزات
             </Button>
           </nav>
         </div>
@@ -94,7 +94,7 @@ const Index = () => {
       {/* Main content */}
       <main
         className={`flex-1 transition-all duration-300 ${
-          isSidebarOpen ? "ml-64" : "ml-0"
+          isSidebarOpen ? "mr-64" : "mr-0"
         }`}
       >
         <div className="container mx-auto px-6 py-8">
@@ -110,11 +110,11 @@ const Index = () => {
               </Button>
             )}
             <div className="relative flex-1 max-w-xl mx-auto">
-              <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
+              <Search className="absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
               <Input
                 type="text"
-                placeholder="Search rooms, guests, or bookings..."
-                className="w-full pl-10"
+                placeholder="البحث عن غرف، نزلاء، أو حجوزات..."
+                className="w-full pr-10"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
@@ -144,12 +144,12 @@ const Index = () => {
               <Card key={room.id} className="hotel-card">
                 <CardHeader>
                   <div className="flex items-center justify-between">
-                    <CardTitle>Room {room.number}</CardTitle>
+                    <CardTitle>غرفة {room.number}</CardTitle>
                     <span
                       className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${
-                        room.status === "available"
+                        room.status === "متاح"
                           ? "bg-green-100 text-green-800"
-                          : room.status === "occupied"
+                          : room.status === "مشغول"
                           ? "bg-amber-100 text-amber-800"
                           : "bg-red-100 text-red-800"
                       }`}
@@ -161,14 +161,14 @@ const Index = () => {
                 </CardHeader>
                 <CardContent>
                   {room.guest && (
-                    <p className="text-sm text-gray-600">Guest: {room.guest}</p>
+                    <p className="text-sm text-gray-600">النزيل: {room.guest}</p>
                   )}
                   <div className="mt-4 flex justify-end space-x-2">
                     <Button variant="outline" size="sm">
-                      Details
+                      التفاصيل
                     </Button>
                     <Button size="sm">
-                      {room.status === "available" ? "Check In" : "Check Out"}
+                      {room.status === "متاح" ? "تسجيل دخول" : "تسجيل خروج"}
                     </Button>
                   </div>
                 </CardContent>
