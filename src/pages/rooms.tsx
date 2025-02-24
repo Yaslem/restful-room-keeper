@@ -21,7 +21,11 @@ import { Room } from "@/types";
 import { toast } from "sonner";
 
 const Rooms = () => {
-  const [newRoom, setNewRoom] = useState({
+  const [newRoom, setNewRoom] = useState<{
+    number: string;
+    type: string;
+    status: "متاح" | "مشغول" | "صيانة";
+  }>({
     number: "",
     type: "قياسية",
     status: "متاح",
